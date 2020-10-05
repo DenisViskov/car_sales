@@ -17,14 +17,16 @@ public class HibernateUtil {
     private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);
 
     static {
+        StandardServiceRegistry registry = null;
         try {
-            final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+            registry = new StandardServiceRegistryBuilder()
                     .configure()
                     .build();
             sessionFactory = new MetadataSources(registry)
                     .buildMetadata()
                     .buildSessionFactory();
         } catch (Throwable e) {
+            StandardServiceRegistryBuilder.destroy(registry);
             LOG.error("Initial SessionFactory creation failed." + e);
             throw new ExceptionInInitializerError(e);
         }
