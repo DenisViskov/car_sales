@@ -19,24 +19,21 @@ public class Announcement {
     private String name;
     @Column(name = "description")
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "status")
     private boolean status;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User owner;
+
 
     public Announcement() {
     }
 
-    public Announcement(long id, String name, String description, LocalDateTime created, boolean status, User owner) {
+    public Announcement(long id, String name, String description, LocalDateTime created, boolean status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
         this.status = status;
-        this.owner = owner;
     }
 
     public long getId() {
@@ -79,14 +76,6 @@ public class Announcement {
         this.status = status;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,12 +85,11 @@ public class Announcement {
                 status == that.status &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(owner, that.owner);
+                Objects.equals(created, that.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, created, status, owner);
+        return Objects.hash(id, name, description, created, status);
     }
 }

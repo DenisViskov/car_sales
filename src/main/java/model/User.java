@@ -22,9 +22,9 @@ public class User {
     private String login;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany
     private Set<Car> cars = new HashSet<>();
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany
     private Set<Announcement> announcements = new HashSet<>();
 
     public User() {
