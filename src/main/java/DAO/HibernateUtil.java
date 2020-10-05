@@ -4,6 +4,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Денис Висков
@@ -12,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  */
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
+    private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);
 
     static {
         try {
@@ -22,7 +25,7 @@ public class HibernateUtil {
                     .buildMetadata()
                     .buildSessionFactory();
         } catch (Throwable e) {
-            System.out.println("Initial SessionFactory creation failed." + e);
+            LOG.error("Initial SessionFactory creation failed." + e);
             throw new ExceptionInInitializerError(e);
         }
     }
