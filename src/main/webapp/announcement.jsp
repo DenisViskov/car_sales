@@ -43,7 +43,7 @@
         <label for="carMileage">Car mileage:</label><br>
         <input type="text" id="carMileage" required name="carMileage"/><br>
         <label for="carCreated">Car created:</label><br>
-        <input type="text" id="carCreated" required name="carCreated"/><br>
+        <input type="date" id="carCreated" required name="carCreated"/><br>
         <label for="comment">Description:</label><br/>
         <textarea name="comment" id="comment" placeholder="about car" maxlength="1000"></textarea><br>
         <input type="file" name="file"/><br>

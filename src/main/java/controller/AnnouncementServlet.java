@@ -38,7 +38,12 @@ public class AnnouncementServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> out = parseRequest(req);
         User user = (User) req.getSession().getAttribute("user");
-
+        if (!out.isEmpty()) {
+            Announcement announcement = initAnnouncement(out);
+            Car car = initCar(out);
+            user.addAnnouncement(announcement);
+            user.addCar(car);
+        }
 
     }
 
