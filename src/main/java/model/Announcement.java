@@ -21,6 +21,8 @@ public class Announcement {
     private String description;
     @Column(name = "created")
     private LocalDateTime created;
+    @Column(name = "photo")
+    private String photo;
     @Column(name = "status")
     private boolean status;
 
@@ -28,11 +30,12 @@ public class Announcement {
     public Announcement() {
     }
 
-    public Announcement(long id, String name, String description, LocalDateTime created, boolean status) {
+    public Announcement(long id, String name, String description, LocalDateTime created, String photo, boolean status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
+        this.photo = photo;
         this.status = status;
     }
 
@@ -68,6 +71,14 @@ public class Announcement {
         this.created = created;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public boolean isStatus() {
         return status;
     }
@@ -85,11 +96,12 @@ public class Announcement {
                 status == that.status &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(created, that.created);
+                Objects.equals(created, that.created) &&
+                Objects.equals(photo, that.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, created, status);
+        return Objects.hash(id, name, description, created, photo, status);
     }
 }

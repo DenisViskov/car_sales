@@ -22,14 +22,18 @@ public class UserDaoImplTest {
         CarDaoImpl carDao = new CarDaoImpl(sessionFactory);
         AnnouncementDaoImpl announcementDao = new AnnouncementDaoImpl(sessionFactory);
         User user = new User(0, "name", "name", "password");
-        Announcement announcement = new Announcement(0, "name", "desc", LocalDateTime.now(), false);
+        Announcement announcement = new Announcement(0,
+                "name",
+                "desc",
+                LocalDateTime.now(),
+                "photo",
+                false);
         Car car = new Car(0,
                 "toyota",
                 "corolla",
                 LocalDate.now(),
                 "sedan",
-                1250000,
-                "photo");
+                1250000);
         user.addCar(car);
         user.addAnnouncement(announcement);
         carDao.add(car);

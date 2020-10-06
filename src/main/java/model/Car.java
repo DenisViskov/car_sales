@@ -25,21 +25,17 @@ public class Car {
     private String bodyType;
     @Column(name = "mileage")
     private long mileage;
-    @Column(name = "photo")
-    private String photo;
-
 
     public Car() {
     }
 
-    public Car(long id, String name, String model, LocalDate created, String bodyType, long mileage, String photo) {
+    public Car(long id, String name, String model, LocalDate created, String bodyType, long mileage) {
         this.id = id;
         this.name = name;
         this.model = model;
         this.created = created;
         this.bodyType = bodyType;
         this.mileage = mileage;
-        this.photo = photo;
     }
 
     public long getId() {
@@ -90,14 +86,6 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,12 +96,11 @@ public class Car {
                 Objects.equals(name, car.name) &&
                 Objects.equals(model, car.model) &&
                 Objects.equals(created, car.created) &&
-                Objects.equals(bodyType, car.bodyType) &&
-                Objects.equals(photo, car.photo);
+                Objects.equals(bodyType, car.bodyType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, model, created, bodyType, mileage, photo);
+        return Objects.hash(id, name, model, created, bodyType, mileage);
     }
 }
