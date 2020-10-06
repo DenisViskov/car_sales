@@ -29,8 +29,8 @@
             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
             crossorigin="anonymous"></script>
 </head>
-<body id="body">
-<div class="container">
+<body>
+<div class="container" id="cont">
     <h2>registration form:</h2>
     <form id="form">
         <label for="name">Name:</label><br>
@@ -62,12 +62,15 @@
                 },
                 dataType: 'json'
             }).done(function (data) {
-                let body = document.getElementById('body')
+                let container = document.getElementById('cont')
+                let h2 = document.createElement('h2')
                 if (data[0]) {
-                    body.appendChild('<h2>Success<h2/>')
+                    h2.innerText = 'Success'
+                    container.appendChild(h2)
                     setTimeout(redirect, 3000)
                 } else {
-                    body.appendChild('<h2>That user already exist<h2/>')
+                    h2.innerText = 'That user already exist'
+                    container.appendChild(h2)
                 }
             }).fail(function (err) {
                 alert(err);
