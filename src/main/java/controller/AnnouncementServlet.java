@@ -68,16 +68,16 @@ public class AnnouncementServlet extends HttpServlet {
         return result;
     }
 
-    private void saveFile(InputStream inputStream, String fileName) {
+    private void saveFile(InputStream inputStream, String fileName) throws IOException {
         File folder = new File(System.getProperty("catalina.base")
-                + File.separator
-                + "bin"
                 + File.separator
                 + "images");
         if (!folder.exists()) {
             folder.mkdir();
+            folder.createNewFile();
         }
         File file = new File(folder + File.separator + fileName);
+        file.createNewFile();
         try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             out.write(inputStream.readAllBytes());
         } catch (IOException e) {

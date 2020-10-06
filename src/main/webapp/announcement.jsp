@@ -31,7 +31,7 @@
 <body>
 <div class="container" id="cont">
     <h2>Please fill the form fields about you car:</h2>
-    <form id="form">
+    <form action="announcement" id="form" enctype="multipart/form-data" method="post">
         <label for="announcementName">Name of announcement:</label><br>
         <input type="text" id="announcementName" required name="announcementName"/><br>
         <label for="carBrand">Car brand:</label><br>
@@ -52,29 +52,3 @@
 </div>
 </body>
 </html>
-
-<script>
-    $('#form').submit(function (e) {
-        e.preventDefault()
-        var form = $('#form').serialize()
-        $.ajax({
-            url: '<%=request.getContextPath()%>/announcement',
-            data: form,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (data) {
-                let cont = document.getElementById('cont')
-                let h2 = document.createElement('h2')
-                if (data[0]) {
-                    h2.innerText = "Announcement was been created"
-                    cont.appendChild(h2)
-                } else {
-                    h2.innerText = "Announcement was not created"
-                    cont.appendChild(h2)
-                }
-            }
-        });
-    })
-
-</script>
