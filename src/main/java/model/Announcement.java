@@ -26,7 +26,6 @@ public class Announcement {
     @Column(name = "status")
     private boolean status;
 
-
     public Announcement() {
     }
 
