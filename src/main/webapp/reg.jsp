@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>sign in</title>
+    <title>sign up</title>
     <style>
         .container {
             padding: 50px;
