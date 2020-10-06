@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
  * @version 1.0
  * @since 06.10.2020
  */
-@WebServlet(name = "InitialServlet", urlPatterns = "/hiden", loadOnStartup = 0)
+@WebServlet(name = "InitialServlet", urlPatterns = "/hidden", loadOnStartup = 0)
 public class InitialServlet extends HttpServlet {
 
     @Override
