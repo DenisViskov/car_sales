@@ -24,8 +24,12 @@
             text-align: center;
         }
     </style>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
 </head>
-<body>
+<body id="body">
 <div class="container">
     <h2>registration form:</h2>
     <form id="form">
@@ -42,3 +46,46 @@
 </div>
 </body>
 </html>
+
+<script>
+    $('#form').submit(function (e) {
+        e.preventDefault()
+        if (validation()) {
+            $.ajax({
+                type: 'POST',
+                url: '<%=request.getContextPath()%>/registration',
+                data: {
+                    name: document.getElementById('name').value,
+                    login: document.getElementById('login').value,
+                    password: document.getElementById('password').value,
+                    confirm: document.getElementById('confirm_password').value
+                },
+                dataType: 'json'
+            }).done(function (data) {
+                let body = document.getElementById('body')
+                if (data[0]) {
+                    body.appendChild('<h2>Success<h2/>')
+                    setTimeout(redirect, 3000)
+                } else {
+                    body.appendChild('<h2>That user already exist<h2/>')
+                }
+            }).fail(function (err) {
+                alert(err);
+            });
+        }
+    })
+
+    function redirect() {
+        window.location.href = "http://localhost:8080/car_sales/index.jsp"
+    }
+
+    function validation() {
+        const password = document.getElementById('password').value
+        const confirm = document.getElementById('confirm_password').value
+        if (password != confirm) {
+            alert("passwords not same")
+            return false
+        }
+        return true
+    }
+</script>
