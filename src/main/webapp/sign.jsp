@@ -12,7 +12,9 @@
     <style>
         .container {
             padding: 50px;
-            position: fixed; top: 50%; left: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
             -webkit-transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
@@ -22,9 +24,12 @@
             text-align: center;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" id="cont">
     <h2>Sign in:</h2>
     <form id="form">
         <label for="login">Login:</label><br>
@@ -36,3 +41,36 @@
 </div>
 </body>
 </html>
+
+<script>
+
+    $('#form').submit(function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'POST',
+            url: '<%=request.getContextPath()%>/sign',
+            data: {
+                login: document.getElementById('login').value,
+                password: document.getElementById('password').value,
+            },
+            dataType: 'json'
+        }).done(function (data) {
+            let container = document.getElementById('cont')
+            let h2 = document.createElement('h2')
+            if (data[0]) {
+                h2.innerText = 'You are entered'
+                container.appendChild(h2)
+                setTimeout(redirectToAddAnnouncement, 3000)
+            } else {
+                h2.innerText = 'Login or password not same'
+                container.appendChild(h2)
+            }
+        }).fail(function (err) {
+            alert(err);
+        });
+    })
+
+    function redirectToAddAnnouncement() {
+        document.location.href = "http://localhost:8080/car_sales/announcement.jsp"
+    }
+</script>
