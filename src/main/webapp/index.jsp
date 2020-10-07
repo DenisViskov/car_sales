@@ -35,6 +35,8 @@
         <td>owner</td>
     </tr>
 </table>
+<br>
+<button type="button" id="addAnnouncement">Add new announcement</button>
 </body>
 </html>
 
@@ -50,6 +52,11 @@
             }
         })
     }
+
+    $('#addAnnouncement').click(function (e) {
+        e.preventDefault()
+        document.location.href = '<%=request.getContextPath()%>/announcement.jsp'
+    })
 
     function collectAnnouncements(data) {
         let table = document.getElementById('table')
