@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Денис Висков
@@ -30,8 +32,14 @@ public class IndexServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
-        writer.print(collectJSON());
-        writer.flush();
+        String getRequest = req.getParameter("GET");
+        if (getRequest.equals("Get announcements")) {
+            writer.print(collectJSON());
+            writer.flush();
+        } else {
+            writer.print(getSessionAnnouncements(req.getSession()));
+            writer.flush();
+        }
     }
 
     @Override
@@ -59,6 +67,14 @@ public class IndexServlet extends HttpServlet {
                 json.put(announcementJson);
             });
         });
+        return json;
+    }
+
+    private JSONObject getSessionAnnouncements(HttpSession session) {
+        Optional<User> box = Optional.ofNullable((User) session.getAttribute("user"));
+        JSONObject json = new JSONObject();
+        box.ifPresent(user -> user.getAnnouncements()
+                .forEach(announcement -> json.put(announcement.getName(), announcement.getName())));
         return json;
     }
 }

@@ -37,6 +37,15 @@
 </table>
 <br>
 <button type="button" id="addAnnouncement">Add new announcement</button>
+<br><br>
+<form>
+    <label for="sessionAnnouncements">Select sold announcement:</label>
+    <select id="sessionAnnouncements" name="announcement">
+    </select>
+    <div>
+        <button type="button" id="selectAnnouncements">Take off announcement</button>
+    </div>
+</form>
 </body>
 </html>
 
@@ -45,17 +54,46 @@
         $.ajax({
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
-            data: {GET: "Get data"},
+            data: {GET: "Get announcements"},
             dataType: 'json',
             success: function (data) {
                 collectAnnouncements(data)
+                getSessionAnnouncements();
             }
         })
+    }
+
+    function getSessionAnnouncements() {
+        $.ajax({
+            type: 'GET',
+            url: '<%=request.getContextPath()%>/index',
+            data: {GET: "Get session announcements"},
+            dataType: 'json',
+            success: function (data) {
+                collectSessionAnnouncements(data)
+            }
+        })
+    }
+
+    function collectSessionAnnouncements(data) {
+        let select = document.getElementById('sessionAnnouncements')
+        for (key in data) {
+            let option = document.createElement('option')
+            option.setAttribute('value', data[key])
+            option.innerText = data[key]
+            select.appendChild(option)
+        }
     }
 
     $('#addAnnouncement').click(function (e) {
         e.preventDefault()
         document.location.href = '<%=request.getContextPath()%>/announcement.jsp'
+    })
+
+    $('#selectAnnouncements').click(function (e) {
+        e.preventDefault()
+        var select = document.getElementById('sessionAnnouncements').selectedIndex;
+        console.log(select.text)
     })
 
     function collectAnnouncements(data) {
