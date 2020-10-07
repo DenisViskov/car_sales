@@ -1,5 +1,9 @@
 package controller;
 
+import DAO.AnnouncementDaoImpl;
+import DAO.CarDaoImpl;
+import DAO.StoreDAO;
+import DAO.UserDaoImpl;
 import model.Announcement;
 import model.Car;
 import model.User;
@@ -38,11 +42,17 @@ public class AnnouncementServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> out = parseRequest(req);
         User user = (User) req.getSession().getAttribute("user");
+        StoreDAO userDAO = (UserDaoImpl) getServletContext().getAttribute("userDao");
+        StoreDAO carDAO = (CarDaoImpl) getServletContext().getAttribute("carDao");
+        StoreDAO announcementDAO = (AnnouncementDaoImpl) getServletContext().getAttribute("announcementDao");
         if (!out.isEmpty()) {
             Announcement announcement = initAnnouncement(out);
             Car car = initCar(out);
+            announcementDAO.add(announcement);
+            carDAO.add(car);
             user.addAnnouncement(announcement);
             user.addCar(car);
+            userDAO.update(user);
         }
 
     }
