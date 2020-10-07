@@ -78,7 +78,7 @@
         let photo = document.createElement('td')
         photo.setAttribute('background', '<%=request.getContextPath()%>/picture?picture=' + data["photo"])
         let status = document.createElement('td')
-        status.innerText = data["status"]
+        status.innerText = data["status"] ? 'sold' : 'active'
         let owner = document.createElement('td')
         owner.innerText = data["owner"]
         tr.appendChild(announcement)
