@@ -13,6 +13,7 @@
             height: 60px;
             border: solid 1px silver;
             text-align: center;
+            background-size: 100% 100%;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
@@ -76,8 +77,6 @@
         description.innerText = data["description"]
         let photo = document.createElement('td')
         photo.setAttribute('background', '<%=request.getContextPath()%>/picture?picture=' + data["photo"])
-        photo.setAttribute('width', '60px')
-        photo.setAttribute('height', '60px')
         let status = document.createElement('td')
         status.innerText = data["status"]
         let owner = document.createElement('td')
