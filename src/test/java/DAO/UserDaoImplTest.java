@@ -27,7 +27,8 @@ public class UserDaoImplTest {
                 "desc",
                 LocalDateTime.now(),
                 "photo",
-                false);
+                false,
+                null);
         Car car = new Car(0,
                 "toyota",
                 "corolla",

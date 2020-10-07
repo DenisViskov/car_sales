@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <title>Announcements today</title>
     <style>
+        .header {
+            background-color: gainsboro;
+        }
+
         td {
             width: 60px;
             height: 60px;
@@ -13,8 +17,8 @@
     </style>
 </head>
 <body>
-<table>
-    <tr>
+<table id="table">
+    <tr class="header">
         <td>Announcement</td>
         <td>Car brand</td>
         <td>Car model</td>
@@ -29,3 +33,4 @@
 </table>
 </body>
 </html>
+

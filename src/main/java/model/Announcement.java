@@ -25,17 +25,21 @@ public class Announcement {
     private String photo;
     @Column(name = "status")
     private boolean status;
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     public Announcement() {
     }
 
-    public Announcement(long id, String name, String description, LocalDateTime created, String photo, boolean status) {
+    public Announcement(long id, String name, String description, LocalDateTime created, String photo, boolean status, Car car) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
         this.photo = photo;
         this.status = status;
+        this.car = car;
     }
 
     public long getId() {
@@ -86,6 +90,14 @@ public class Announcement {
         this.status = status;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,11 +108,12 @@ public class Announcement {
                 Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(created, that.created) &&
-                Objects.equals(photo, that.photo);
+                Objects.equals(photo, that.photo) &&
+                Objects.equals(car, that.car);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, created, photo, status);
+        return Objects.hash(id, name, description, created, photo, status, car);
     }
 }

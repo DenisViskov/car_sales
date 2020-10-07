@@ -50,8 +50,9 @@ public class AnnouncementServlet extends HttpServlet {
         if (!out.isEmpty()) {
             Announcement announcement = initAnnouncement(out);
             Car car = initCar(out);
-            announcementDAO.add(announcement);
             carDAO.add(car);
+            announcement.setCar(car);
+            announcementDAO.add(announcement);
             user.addAnnouncement(announcement);
             user.addCar(car);
             userDAO.update(user);
