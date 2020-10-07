@@ -75,9 +75,9 @@
         let description = document.createElement('td')
         description.innerText = data["description"]
         let photo = document.createElement('td')
-        let src = document.createElement('img')
-        src.setAttribute('src', data["photo"])
-        photo.innerHTML = src
+        photo.setAttribute('background', '<%=request.getContextPath()%>/picture?picture=' + data["photo"])
+        photo.setAttribute('width', '60px')
+        photo.setAttribute('height', '60px')
         let status = document.createElement('td')
         status.innerText = data["status"]
         let owner = document.createElement('td')

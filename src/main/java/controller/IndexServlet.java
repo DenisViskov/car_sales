@@ -53,13 +53,7 @@ public class IndexServlet extends HttpServlet {
                 announcementJson.put("Car body type", announcement.getCar().getBodyType());
                 announcementJson.put("Car mileage", announcement.getCar().getMileage());
                 announcementJson.put("description", announcement.getDescription());
-                announcementJson.put("photo", System.getenv("CATALINA_HOME")
-                        + File.separator
-                        + "bin"
-                        + File.separator
-                        + "images"
-                        + File.separator
-                        + announcement.getPhoto());
+                announcementJson.put("photo", announcement.getPhoto());
                 announcementJson.put("status", announcement.isStatus());
                 announcementJson.put("owner", user.getName());
                 json.put(announcementJson);
