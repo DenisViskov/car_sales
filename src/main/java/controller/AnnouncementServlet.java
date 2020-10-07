@@ -41,6 +41,8 @@ public class AnnouncementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> out = parseRequest(req);
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
         User user = (User) req.getSession().getAttribute("user");
         StoreDAO userDAO = (UserDaoImpl) getServletContext().getAttribute("userDao");
         StoreDAO carDAO = (CarDaoImpl) getServletContext().getAttribute("carDao");
@@ -53,8 +55,12 @@ public class AnnouncementServlet extends HttpServlet {
             user.addAnnouncement(announcement);
             user.addCar(car);
             userDAO.update(user);
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+        } else {
+            writer.print("<h2>Announcement was not added<h2/>" + System.lineSeparator()
+                    + "<a href=\"announcement.jsp\">Try again</a>");
+            writer.flush();
         }
-
     }
 
     private Map<String, String> parseRequest(HttpServletRequest req) {
