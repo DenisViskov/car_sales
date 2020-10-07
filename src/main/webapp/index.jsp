@@ -45,10 +45,54 @@
             data: {GET: "Get data"},
             dataType: 'json',
             success: function (data) {
-                console.log(data)
+                collectAnnouncements(data)
             }
         })
     }
 
+    function collectAnnouncements(data) {
+        let table = document.getElementById('table')
+        for (key in data) {
+            let readyTr = collectTr(data[key])
+            table.appendChild(readyTr)
+        }
+    }
+
+    function collectTr(data) {
+        let tr = document.createElement('tr')
+        let announcement = document.createElement('td')
+        announcement.innerText = data["Announcement"]
+        let carBrand = document.createElement('td')
+        carBrand.innerText = data["Car brand"]
+        let carModel = document.createElement('td')
+        carModel.innerText = data["Car model"]
+        let carCreated = document.createElement('td')
+        carCreated.innerText = data["Car created"]
+        let carBodyType = document.createElement('td')
+        carBodyType.innerText = data["Car body type"]
+        let carMileage = document.createElement('td')
+        carMileage.innerText = data["Car mileage"]
+        let description = document.createElement('td')
+        description.innerText = data["description"]
+        let photo = document.createElement('td')
+        let src = document.createElement('img')
+        src.setAttribute('src', data["photo"])
+        photo.innerHTML = src
+        let status = document.createElement('td')
+        status.innerText = data["status"]
+        let owner = document.createElement('td')
+        owner.innerText = data["owner"]
+        tr.appendChild(announcement)
+        tr.appendChild(carBrand)
+        tr.appendChild(carModel)
+        tr.appendChild(carCreated)
+        tr.appendChild(carBodyType)
+        tr.appendChild(carMileage)
+        tr.appendChild(description)
+        tr.appendChild(photo)
+        tr.appendChild(status)
+        tr.appendChild(owner)
+        return tr;
+    }
 
 </script>
