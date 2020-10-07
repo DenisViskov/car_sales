@@ -91,9 +91,7 @@ public class AnnouncementServlet extends HttpServlet {
     }
 
     private void saveFile(InputStream inputStream, String fileName) throws IOException {
-        File folder = new File(System.getProperty("catalina.base")
-                + File.separator
-                + "images");
+        File folder = new File("images");
         if (!folder.exists()) {
             folder.mkdir();
             folder.createNewFile();
