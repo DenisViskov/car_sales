@@ -11,18 +11,32 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Class is an UserDao implementation
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
  */
 public class UserDaoImpl implements StoreDAO<User> {
+    /**
+     * Session factory
+     */
     private final SessionFactory sf;
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(UserDaoImpl.class);
 
     public UserDaoImpl(SessionFactory sf) {
         this.sf = sf;
     }
 
+    /**
+     * Method add new user to DB
+     *
+     * @param some
+     * @return User
+     */
     @Override
     public User add(User some) {
         Session session = sf.openSession();
@@ -39,6 +53,12 @@ public class UserDaoImpl implements StoreDAO<User> {
         return some;
     }
 
+    /**
+     * Method updates user in DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean update(User some) {
         boolean result = true;
@@ -57,6 +77,12 @@ public class UserDaoImpl implements StoreDAO<User> {
         return result;
     }
 
+    /**
+     * Method delete user from DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean delete(User some) {
         boolean result = true;
@@ -75,6 +101,11 @@ public class UserDaoImpl implements StoreDAO<User> {
         return result;
     }
 
+    /**
+     * Method return all users from DB
+     *
+     * @return List
+     */
     @Override
     public List<User> findAll() {
         Session session = sf.openSession();
@@ -92,6 +123,12 @@ public class UserDaoImpl implements StoreDAO<User> {
         }
     }
 
+    /**
+     * Method looking for user in DB by given id
+     *
+     * @param id
+     * @return Optional
+     */
     @Override
     public Optional<User> find(long id) {
         Session session = sf.openSession();

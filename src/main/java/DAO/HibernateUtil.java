@@ -8,12 +8,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Class is an Hibernate util
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
  */
 public class HibernateUtil {
+    /**
+     * Session factory
+     */
     private static final SessionFactory sessionFactory;
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);
 
     static {
@@ -32,6 +40,11 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * Method return session factory
+     *
+     * @return SessionFactory
+     */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

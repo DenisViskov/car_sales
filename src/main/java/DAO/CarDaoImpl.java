@@ -11,19 +11,32 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Class is a car dao implementation
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
  */
 public class CarDaoImpl implements StoreDAO<Car> {
-
+    /**
+     * Session Factory
+     */
     private final SessionFactory sf;
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(CarDaoImpl.class);
 
     public CarDaoImpl(SessionFactory sf) {
         this.sf = sf;
     }
 
+    /**
+     * Method add new car to DB
+     *
+     * @param some
+     * @return Car
+     */
     @Override
     public Car add(Car some) {
         Session session = sf.openSession();
@@ -40,6 +53,12 @@ public class CarDaoImpl implements StoreDAO<Car> {
         return some;
     }
 
+    /**
+     * Method update car in DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean update(Car some) {
         boolean result = true;
@@ -58,6 +77,12 @@ public class CarDaoImpl implements StoreDAO<Car> {
         return result;
     }
 
+    /**
+     * Method delete car from DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean delete(Car some) {
         boolean result = true;
@@ -76,6 +101,11 @@ public class CarDaoImpl implements StoreDAO<Car> {
         return result;
     }
 
+    /**
+     * Method return all cars from DB
+     *
+     * @return List
+     */
     @Override
     public List<Car> findAll() {
         Session session = sf.openSession();
@@ -93,6 +123,12 @@ public class CarDaoImpl implements StoreDAO<Car> {
         }
     }
 
+    /**
+     * Method return car by given ID from DB
+     *
+     * @param id
+     * @return Optional
+     */
     @Override
     public Optional<Car> find(long id) {
         Session session = sf.openSession();

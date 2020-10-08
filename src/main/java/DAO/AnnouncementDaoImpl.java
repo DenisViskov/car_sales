@@ -11,19 +11,32 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Class is an announcement dao implementation
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
  */
 public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
-
+    /**
+     * Session Factory
+     */
     private final SessionFactory sf;
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(AnnouncementDaoImpl.class);
 
     public AnnouncementDaoImpl(SessionFactory sf) {
         this.sf = sf;
     }
 
+    /**
+     * Method add new announcement to DB
+     *
+     * @param some
+     * @return Announcement
+     */
     @Override
     public Announcement add(Announcement some) {
         Session session = sf.openSession();
@@ -40,6 +53,12 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
         return some;
     }
 
+    /**
+     * Method update announcement in DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean update(Announcement some) {
         boolean result = true;
@@ -58,6 +77,12 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
         return result;
     }
 
+    /**
+     * Method delete announcement from DB
+     *
+     * @param some
+     * @return boolean
+     */
     @Override
     public boolean delete(Announcement some) {
         boolean result = true;
@@ -76,6 +101,11 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
         return result;
     }
 
+    /**
+     * Method return all announcement from DB
+     *
+     * @return List
+     */
     @Override
     public List<Announcement> findAll() {
         Session session = sf.openSession();
@@ -93,6 +123,12 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
         }
     }
 
+    /**
+     * Method return announcement by given ID from DB
+     *
+     * @param id
+     * @return Optional
+     */
     @Override
     public Optional<Announcement> find(long id) {
         Session session = sf.openSession();
