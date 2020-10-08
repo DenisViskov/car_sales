@@ -22,9 +22,9 @@ public class User {
     private String login;
     @Column(name = "password")
     private String password;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Car> cars = new HashSet<>();
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Announcement> announcements = new HashSet<>();
 
     public User() {

@@ -1,8 +1,11 @@
 package controller;
 
+import DAO.AnnouncementDaoImpl;
+import DAO.CarDaoImpl;
 import DAO.StoreDAO;
 import DAO.UserDaoImpl;
 import model.Announcement;
+import model.Car;
 import model.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,7 +47,20 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        req.setCharacterEncoding("UTF-8");
+        String name = req.getParameter("announcement");
+        User user = (User) req.getSession().getAttribute("user");
+        StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
+        StoreDAO carDao = (CarDaoImpl) getServletContext().getAttribute("carDao");
+        StoreDAO announcementDao = (AnnouncementDaoImpl) getServletContext().getAttribute("announcementDao");
+        Announcement announcement = user.getAnnouncements().stream()
+                .filter(announce -> announce.getName().equals(name))
+                .findFirst()
+                .get();
+        user.getAnnouncements().remove(announcement);
+        user.getCars().remove(announcement.getCar());
+        userDao.update(user);
+        announcementDao.delete(announcement);
     }
 
     private JSONArray collectJSON() {

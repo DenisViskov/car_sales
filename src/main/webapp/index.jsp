@@ -93,7 +93,15 @@
     $('#selectAnnouncements').click(function (e) {
         e.preventDefault()
         var select = document.getElementById('sessionAnnouncements').selectedIndex;
-        console.log(select.text)
+        var options = document.getElementsByTagName('option')
+        const announcement = options[select].value
+        $.ajax({
+            type: 'POST',
+            url: '<%=request.getContextPath()%>/index',
+            data: {announcement: announcement},
+            dataType: 'json',
+            success: window.location.reload()
+        })
     })
 
     function collectAnnouncements(data) {

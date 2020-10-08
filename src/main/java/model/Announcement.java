@@ -25,7 +25,7 @@ public class Announcement {
     private String photo;
     @Column(name = "status")
     private boolean status;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
 
