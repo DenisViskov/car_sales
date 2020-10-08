@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
+ * Class is a car
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
@@ -12,17 +14,35 @@ import java.util.Objects;
 @Entity
 @Table(name = "cars")
 public class Car {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    /**
+     * Brand name
+     */
     @Column(name = "name")
     private String name;
+    /**
+     * Model
+     */
     @Column(name = "model")
     private String model;
+    /**
+     * Date created
+     */
     @Column(name = "created")
     private LocalDate created;
+    /**
+     * Body type
+     */
     @Column(name = "body")
     private String bodyType;
+    /**
+     * Mileage
+     */
     @Column(name = "mileage")
     private long mileage;
 

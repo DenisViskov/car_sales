@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
+ * Class is an announcement
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
@@ -12,19 +14,40 @@ import java.util.Objects;
 @Entity
 @Table(name = "announcements")
 public class Announcement {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
+    /**
+     * Description
+     */
     @Column(name = "description")
     private String description;
+    /**
+     * Created date
+     */
     @Column(name = "created")
     private LocalDateTime created;
+    /**
+     * Name photo
+     */
     @Column(name = "photo")
     private String photo;
+    /**
+     * Status of announcement
+     */
     @Column(name = "status")
     private boolean status;
+    /**
+     * Car on sale
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;

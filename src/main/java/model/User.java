@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Class is an User
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
@@ -13,17 +15,35 @@ import java.util.Set;
 @Entity
 @Table(name = "owners")
 public class User {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
+    /**
+     * Login
+     */
     @Column(name = "login")
     private String login;
+    /**
+     * Password
+     */
     @Column(name = "password")
     private String password;
+    /**
+     * Cars
+     */
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Car> cars = new HashSet<>();
+    /**
+     * Announcements
+     */
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Announcement> announcements = new HashSet<>();
 
@@ -37,10 +57,20 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Method add car to cars set
+     *
+     * @param car
+     */
     public void addCar(Car car) {
         cars.add(car);
     }
 
+    /**
+     * Method add announcement to announcements set
+     *
+     * @param announcement
+     */
     public void addAnnouncement(Announcement announcement) {
         announcements.add(announcement);
     }
