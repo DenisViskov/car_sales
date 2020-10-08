@@ -12,13 +12,17 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
+ * Class is a session filter
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 08.10.2020
  */
 @WebFilter(urlPatterns = "*")
 public class SessionFilter implements Filter {
-
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(SessionFilter.class);
 
     @Override

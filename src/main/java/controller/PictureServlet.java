@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
+ * Class is a picture servlet
+ * Execute sending picture on the client
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 07.10.2020

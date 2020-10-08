@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 /**
+ * Class is an initial servlet
+ * Execute initialization servlet context and given him DAO storage
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 06.10.2020

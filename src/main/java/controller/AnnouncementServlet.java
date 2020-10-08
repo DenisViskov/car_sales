@@ -29,13 +29,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Class is an announcement servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 06.10.2020
  */
 @WebServlet("/announcement")
 public class AnnouncementServlet extends HttpServlet {
-
+    /**
+     * Logger
+     */
     private static final Logger LOG = LoggerFactory.getLogger(AnnouncementServlet.class);
 
     @Override
@@ -64,6 +68,12 @@ public class AnnouncementServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method execute parsing request and return associated map with key from request and given values
+     *
+     * @param req
+     * @return Map
+     */
     private Map<String, String> parseRequest(HttpServletRequest req) {
         Map<String, String> result = new HashMap<>();
         try {
@@ -90,6 +100,13 @@ public class AnnouncementServlet extends HttpServlet {
         return result;
     }
 
+    /**
+     * Method execute writing file on local storage
+     *
+     * @param inputStream
+     * @param fileName
+     * @throws IOException
+     */
     private void saveFile(InputStream inputStream, String fileName) throws IOException {
         File folder = new File("images");
         if (!folder.exists()) {
@@ -106,6 +123,12 @@ public class AnnouncementServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Method execute initialize announcement from given Map
+     *
+     * @param out
+     * @return Announcement
+     */
     private Announcement initAnnouncement(Map<String, String> out) {
         Announcement announcement = new Announcement();
         announcement.setId(0);
@@ -125,6 +148,12 @@ public class AnnouncementServlet extends HttpServlet {
         return announcement;
     }
 
+    /**
+     * Method execute initialize car from given Map
+     *
+     * @param out
+     * @return Car
+     */
     private Car initCar(Map<String, String> out) {
         Car car = new Car();
         car.setId(0);

@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Class is a sign servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 06.10.2020
@@ -47,6 +49,13 @@ public class SignServlet extends HttpServlet {
                 });
     }
 
+    /**
+     * Method looking for user by given login and password in DB
+     *
+     * @param login
+     * @param password
+     * @return Optional
+     */
     private Optional<User> getUser(String login, String password) {
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
         List<User> all = userDao.findAll();

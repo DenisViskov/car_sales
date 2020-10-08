@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Class is an index servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 07.10.2020
@@ -51,7 +53,6 @@ public class IndexServlet extends HttpServlet {
         String name = req.getParameter("announcement");
         User user = (User) req.getSession().getAttribute("user");
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
-        StoreDAO carDao = (CarDaoImpl) getServletContext().getAttribute("carDao");
         StoreDAO announcementDao = (AnnouncementDaoImpl) getServletContext().getAttribute("announcementDao");
         Announcement announcement = user.getAnnouncements().stream()
                 .filter(announce -> announce.getName().equals(name))
@@ -63,6 +64,11 @@ public class IndexServlet extends HttpServlet {
         announcementDao.delete(announcement);
     }
 
+    /**
+     * Method return ready json for send to client on the GET request
+     *
+     * @return JSONArray
+     */
     private JSONArray collectJSON() {
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
         JSONArray json = new JSONArray();
@@ -86,6 +92,12 @@ public class IndexServlet extends HttpServlet {
         return json;
     }
 
+    /**
+     * Method return ready json for send to client on the GET request
+     *
+     * @param session
+     * @return JSONObject
+     */
     private JSONObject getSessionAnnouncements(HttpSession session) {
         Optional<User> box = Optional.ofNullable((User) session.getAttribute("user"));
         JSONObject json = new JSONObject();

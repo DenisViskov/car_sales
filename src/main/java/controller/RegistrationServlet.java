@@ -15,6 +15,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
+ * Class is a registration servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 06.10.2020
@@ -43,6 +45,12 @@ public class RegistrationServlet extends HttpServlet {
         writer.flush();
     }
 
+    /**
+     * Method execute check users from DB on contains given login
+     *
+     * @param login
+     * @return boolean
+     */
     private boolean check(String login) {
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
         List<User> all = userDao.findAll();
@@ -50,6 +58,13 @@ public class RegistrationServlet extends HttpServlet {
                 .anyMatch(user -> user.getLogin().equals(login));
     }
 
+    /**
+     * Method execute creation new user on DB
+     *
+     * @param name
+     * @param login
+     * @param password
+     */
     private void register(String name, String login, String password) {
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
         userDao.add(new User(0, name, login, password));
