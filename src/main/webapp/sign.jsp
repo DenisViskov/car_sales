@@ -38,11 +38,18 @@
         <input type="password" id="password" required name="password"/><br>
         <input type="submit" id="button" value="Войти"/>
     </form>
+    <div>
+        <button id="registration" type="button">Registration now</button>
+    </div>
 </div>
 </body>
 </html>
 
 <script>
+
+    $('#registration').click(function (e) {
+        document.location.href = '<%=request.getContextPath()%>/reg.jsp'
+    })
 
     $('#form').submit(function (e) {
         e.preventDefault()
