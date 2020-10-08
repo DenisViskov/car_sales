@@ -41,7 +41,6 @@ public class SessionFilter implements Filter {
             box.ifPresentOrElse(user -> {
                 try {
                     filterChain.doFilter(req, resp);
-                    return;
                 } catch (IOException | ServletException e) {
                     LOG.error(e.getMessage(), e);
                     e.printStackTrace();
@@ -49,13 +48,13 @@ public class SessionFilter implements Filter {
             }, () -> {
                 try {
                     resp.sendRedirect(req.getContextPath() + "/sign.jsp");
-                    return;
                 } catch (IOException e) {
                     LOG.error(e.getMessage(), e);
                     e.printStackTrace();
                 }
             });
+        } else {
+            filterChain.doFilter(req, resp);
         }
-        filterChain.doFilter(req, resp);
     }
 }
