@@ -1,7 +1,6 @@
-package DAO;
+package persistance;
 
 import model.Announcement;
-import model.Car;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;

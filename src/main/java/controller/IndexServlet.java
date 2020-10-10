@@ -1,11 +1,7 @@
 package controller;
 
-import DAO.AnnouncementDaoImpl;
-import DAO.CarDaoImpl;
-import DAO.StoreDAO;
-import DAO.UserDaoImpl;
+import persistance.*;
 import model.Announcement;
-import model.Car;
 import model.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,12 +32,28 @@ public class IndexServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
+        StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
+        UserFilterDao filterDao = (UserFilterDao) userDao;
         String getRequest = req.getParameter("GET");
         if (getRequest.equals("Get announcements")) {
-            writer.print(collectJSON());
+            writer.print(collectJSON(userDao.findAll()));
             writer.flush();
-        } else {
+        }
+        if (getRequest.equals("Get session announcements")) {
             writer.print(getSessionAnnouncements(req.getSession()));
+            writer.flush();
+        }
+        if (getRequest.equals("Get only with photo")) {
+            writer.print(collectJSON(filterDao.getUsersWithAnnouncementsHasPhoto()));
+            writer.flush();
+        }
+        if (getRequest.equals("Get only the last day")) {
+            writer.print(collectJSON(filterDao.getUsersWhoPostedLastDay()));
+            writer.flush();
+        }
+        if (getRequest.equals("Get cars by brand")) {
+            String carName = req.getParameter("carName");
+            writer.print(collectJSON(filterDao.getUsersWithCarDefinedBrand(carName)));
             writer.flush();
         }
     }
@@ -67,13 +78,12 @@ public class IndexServlet extends HttpServlet {
     /**
      * Method return ready json for send to client on the GET request
      *
+     * @param target list
      * @return JSONArray
      */
-    private JSONArray collectJSON() {
-        StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
+    private JSONArray collectJSON(List<User> target) {
         JSONArray json = new JSONArray();
-        List<User> all = userDao.findAll();
-        all.forEach(user -> {
+        target.forEach(user -> {
             user.getAnnouncements().forEach(announcement -> {
                 JSONObject announcementJson = new JSONObject();
                 announcementJson.put("Announcement", announcement.getName());

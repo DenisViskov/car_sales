@@ -1,15 +1,12 @@
 package controller;
 
-import DAO.AnnouncementDaoImpl;
-import DAO.CarDaoImpl;
-import DAO.StoreDAO;
-import DAO.UserDaoImpl;
+import persistance.AnnouncementDaoImpl;
+import persistance.CarDaoImpl;
+import persistance.UserDaoImpl;
 import model.Announcement;
 import model.Car;
 import model.User;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -20,11 +17,9 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 
@@ -60,7 +55,7 @@ public class IndexServletTest {
     }
 
     @Test
-    public void whenDoGetGetAnotherReqTest() throws ServletException, IOException {
+    public void whenDoGetSessionsReqTest() throws ServletException, IOException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);
@@ -77,7 +72,7 @@ public class IndexServletTest {
                 "photo",
                 false,
                 car));
-        when(req.getParameter("GET")).thenReturn("another");
+        when(req.getParameter("GET")).thenReturn("Get session announcements");
         when(config.getServletContext()).thenReturn(context);
         when(resp.getWriter()).thenReturn(writer);
         when(req.getSession()).thenReturn(session);

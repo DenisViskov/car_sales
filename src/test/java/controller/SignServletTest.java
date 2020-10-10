@@ -1,9 +1,8 @@
 package controller;
 
-import DAO.UserDaoImpl;
+import persistance.UserDaoImpl;
 import model.User;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 

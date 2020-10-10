@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <title>Announcements today</title>
     <style>
+        .box div {
+            width: 90px;
+            display: inline-block;
+        }
+
         .header {
             background-color: gainsboro;
         }
@@ -21,6 +26,20 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="box">
+    <div>
+        <button type="button" id="filterPhoto">Show with photo</button>
+    </div>
+    <div>
+        <button type="button" id="filterLastDay">Show the last day</button>
+    </div>
+    <div>
+        <button type="button" id="filerCarBrand">Show with car brand:</button>
+    </div>
+    <div>
+        <input type="text" id="carName" required name="car brand"/>
+    </div>
+</div>
 <table id="table">
     <tr class="header">
         <td>Announcement</td>
@@ -84,6 +103,61 @@
             select.appendChild(option)
         }
     }
+
+    $('#filterPhoto').click(function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'GET',
+            url: '<%=request.getContextPath()%>/index',
+            data: {GET: "Get only with photo"},
+            dataType: 'json',
+            success: function (data) {
+                let table = document.getElementById('table')
+                let head = table.getElementsByTagName('tr')[0]
+                table.innerHTML = ''
+                table.appendChild(head)
+                collectAnnouncements(data)
+            }
+        })
+    })
+
+    $('#filterLastDay').click(function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'GET',
+            url: '<%=request.getContextPath()%>/index',
+            data: {GET: "Get only the last day"},
+            dataType: 'json',
+            success: function (data) {
+                let table = document.getElementById('table')
+                let head = table.getElementsByTagName('tr')[0]
+                table.innerHTML = ''
+                table.appendChild(head)
+                collectAnnouncements(data)
+            }
+        })
+    })
+
+    $('#filerCarBrand').click(function (e) {
+        e.preventDefault()
+        const brand = document.getElementById('carName').value
+        $.ajax({
+            type: 'GET',
+            url: '<%=request.getContextPath()%>/index',
+            data: {
+                GET: "Get cars by brand",
+                carName: brand
+            },
+            dataType: 'json',
+            success: function (data) {
+                let table = document.getElementById('table')
+                let head = table.getElementsByTagName('tr')[0]
+                table.innerHTML = ''
+                table.appendChild(head)
+                collectAnnouncements(data)
+            }
+        })
+    })
 
     $('#addAnnouncement').click(function (e) {
         e.preventDefault()

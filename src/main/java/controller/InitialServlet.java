@@ -1,6 +1,6 @@
 package controller;
 
-import DAO.*;
+import persistance.*;
 import org.hibernate.SessionFactory;
 
 import javax.servlet.ServletException;

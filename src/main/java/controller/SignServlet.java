@@ -1,7 +1,7 @@
 package controller;
 
-import DAO.StoreDAO;
-import DAO.UserDaoImpl;
+import persistance.StoreDAO;
+import persistance.UserDaoImpl;
 import model.User;
 import org.json.JSONObject;
 
