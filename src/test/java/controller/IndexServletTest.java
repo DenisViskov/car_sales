@@ -84,35 +84,6 @@ public class IndexServletTest {
     }
 
     @Test
-    public void whenDoGetGetOnlyWithPhotoReqTest() throws ServletException, IOException {
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
-        PrintWriter writer = mock(PrintWriter.class);
-        ServletContext context = mock(ServletContext.class);
-        ServletConfig config = mock(ServletConfig.class);
-        HttpSession session = mock(HttpSession.class);
-        User user = new User(0, "name", "login", "password");
-        Car car = new Car();
-        user.addCar(car);
-        user.addAnnouncement(new Announcement(0,
-                "name",
-                "desc",
-                LocalDateTime.now(),
-                "photo",
-                false,
-                car));
-        when(req.getParameter("GET")).thenReturn("Get only with photo");
-        when(config.getServletContext()).thenReturn(context);
-        when(resp.getWriter()).thenReturn(writer);
-        when(req.getSession()).thenReturn(session);
-        when(session.getAttribute("user")).thenReturn(user);
-        IndexServlet servlet = new IndexServlet();
-        servlet.init(config);
-        servlet.doGet(req,resp);
-        verify(writer).flush();
-    }
-
-    @Test
     public void doPostTest() throws ServletException, IOException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
