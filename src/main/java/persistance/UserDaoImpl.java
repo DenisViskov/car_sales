@@ -147,6 +147,11 @@ public class UserDaoImpl implements StoreDAO<User>, UserFilterDao<User> {
         }
     }
 
+    /**
+     * Method return filtered List by last day announcements
+     *
+     * @return List
+     */
     @Override
     public List<User> getUsersWhoPostedLastDay() {
         LocalDateTime oneDayAgo = LocalDateTime.of(LocalDateTime.now().getYear(),
@@ -163,6 +168,11 @@ public class UserDaoImpl implements StoreDAO<User>, UserFilterDao<User> {
         );
     }
 
+    /**
+     * Method return filtered list with announcements who has photo
+     *
+     * @return List
+     */
     @Override
     public List<User> getUsersWithAnnouncementsHasPhoto() {
         return find(session -> session.createQuery("select distinct u from User u " +
@@ -172,6 +182,12 @@ public class UserDaoImpl implements StoreDAO<User>, UserFilterDao<User> {
         );
     }
 
+    /**
+     * Method return filtered list with defined car brand
+     *
+     * @param brand
+     * @return List
+     */
     @Override
     public List<User> getUsersWithCarDefinedBrand(String brand) {
         return find(session -> session.createQuery("select distinct u from User u " +
@@ -183,6 +199,13 @@ public class UserDaoImpl implements StoreDAO<User>, UserFilterDao<User> {
         );
     }
 
+    /**
+     * Method execute abstract search by given command in session
+     *
+     * @param command
+     * @param <V>
+     * @return V
+     */
     private <V> V find(Function<Session, V> command) {
         Session session = sf.openSession();
         try {
