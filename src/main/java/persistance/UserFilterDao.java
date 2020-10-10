@@ -1,6 +1,4 @@
-package DAO;
-
-import model.User;
+package persistance;
 
 import java.util.List;
 

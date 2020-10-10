@@ -1,4 +1,4 @@
-package DAO;
+package persistance;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

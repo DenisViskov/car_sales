@@ -1,9 +1,9 @@
 package controller;
 
-import DAO.AnnouncementDaoImpl;
-import DAO.CarDaoImpl;
-import DAO.StoreDAO;
-import DAO.UserDaoImpl;
+import persistance.AnnouncementDaoImpl;
+import persistance.CarDaoImpl;
+import persistance.StoreDAO;
+import persistance.UserDaoImpl;
 import model.Announcement;
 import model.Car;
 import model.User;
@@ -15,7 +15,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.management.OperationsException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

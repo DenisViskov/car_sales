@@ -1,6 +1,5 @@
-package DAO;
+package persistance;
 
-import model.Announcement;
 import model.Car;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Class is an announcement dao implementation
+ * Class is a car dao implementation
  *
  * @author Денис Висков
  * @version 1.0
  * @since 05.10.2020
  */
-public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
+public class CarDaoImpl implements StoreDAO<Car> {
     /**
      * Session Factory
      */
@@ -25,20 +24,20 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
     /**
      * Logger
      */
-    private static final Logger LOG = LoggerFactory.getLogger(AnnouncementDaoImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CarDaoImpl.class);
 
-    public AnnouncementDaoImpl(SessionFactory sf) {
+    public CarDaoImpl(SessionFactory sf) {
         this.sf = sf;
     }
 
     /**
-     * Method add new announcement to DB
+     * Method add new car to DB
      *
      * @param some
-     * @return Announcement
+     * @return Car
      */
     @Override
-    public Announcement add(Announcement some) {
+    public Car add(Car some) {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
@@ -54,13 +53,13 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
     }
 
     /**
-     * Method update announcement in DB
+     * Method update car in DB
      *
      * @param some
      * @return boolean
      */
     @Override
-    public boolean update(Announcement some) {
+    public boolean update(Car some) {
         boolean result = true;
         Session session = sf.openSession();
         try {
@@ -78,13 +77,13 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
     }
 
     /**
-     * Method delete announcement from DB
+     * Method delete car from DB
      *
      * @param some
      * @return boolean
      */
     @Override
-    public boolean delete(Announcement some) {
+    public boolean delete(Car some) {
         boolean result = true;
         Session session = sf.openSession();
         try {
@@ -102,16 +101,16 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
     }
 
     /**
-     * Method return all announcement from DB
+     * Method return all cars from DB
      *
      * @return List
      */
     @Override
-    public List<Announcement> findAll() {
+    public List<Car> findAll() {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            List result = session.createQuery("from model.Announcement").list();
+            List result = session.createQuery("from model.Car").list();
             session.getTransaction().commit();
             return result;
         } catch (Throwable e) {
@@ -124,17 +123,17 @@ public class AnnouncementDaoImpl implements StoreDAO<Announcement> {
     }
 
     /**
-     * Method return announcement by given ID from DB
+     * Method return car by given ID from DB
      *
      * @param id
      * @return Optional
      */
     @Override
-    public Optional<Announcement> find(long id) {
+    public Optional<Car> find(long id) {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            Announcement result = session.get(Announcement.class, id);
+            Car result = session.get(Car.class, id);
             session.getTransaction().commit();
             return Optional.ofNullable(result);
         } catch (Throwable e) {
