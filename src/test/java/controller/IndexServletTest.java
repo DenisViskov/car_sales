@@ -43,7 +43,7 @@ public class IndexServletTest {
                 "photo",
                 false,
                 car));
-        when(req.getParameter("GET")).thenReturn("Get announcements");
+        when(req.getParameter("GET")).thenReturn("GET_announcements");
         when(config.getServletContext()).thenReturn(context);
         when(context.getAttribute("userDao")).thenReturn(userDao);
         when(userDao.findAll()).thenReturn(List.of(user));
@@ -72,7 +72,7 @@ public class IndexServletTest {
                 "photo",
                 false,
                 car));
-        when(req.getParameter("GET")).thenReturn("Get session announcements");
+        when(req.getParameter("GET")).thenReturn("GET_session_announcements");
         when(config.getServletContext()).thenReturn(context);
         when(resp.getWriter()).thenReturn(writer);
         when(req.getSession()).thenReturn(session);

@@ -73,7 +73,7 @@
         $.ajax({
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
-            data: {GET: "Get announcements"},
+            data: {GET: "GET_announcements"},
             dataType: 'json',
             success: function (data) {
                 collectAnnouncements(data)
@@ -86,7 +86,7 @@
         $.ajax({
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
-            data: {GET: "Get session announcements"},
+            data: {GET: "GET_session_announcements"},
             dataType: 'json',
             success: function (data) {
                 collectSessionAnnouncements(data)
@@ -109,7 +109,7 @@
         $.ajax({
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
-            data: {GET: "Get only with photo"},
+            data: {GET: "GET_only_with_photo"},
             dataType: 'json',
             success: function (data) {
                 let table = document.getElementById('table')
@@ -126,7 +126,7 @@
         $.ajax({
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
-            data: {GET: "Get only the last day"},
+            data: {GET: "GET_only_the_last_day"},
             dataType: 'json',
             success: function (data) {
                 let table = document.getElementById('table')
@@ -145,7 +145,7 @@
             type: 'GET',
             url: '<%=request.getContextPath()%>/index',
             data: {
-                GET: "Get cars by brand",
+                GET: "GET_cars_by_brand",
                 carName: brand
             },
             dataType: 'json',

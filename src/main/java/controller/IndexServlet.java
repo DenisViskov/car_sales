@@ -35,23 +35,23 @@ public class IndexServlet extends HttpServlet {
         StoreDAO userDao = (UserDaoImpl) getServletContext().getAttribute("userDao");
         UserFilterDao filterDao = (UserFilterDao) userDao;
         String getRequest = req.getParameter("GET");
-        if (getRequest.equals("Get announcements")) {
+        if (getRequest.equals(Key.GET_announcements.name())) {
             writer.print(collectJSON(userDao.findAll()));
             writer.flush();
         }
-        if (getRequest.equals("Get session announcements")) {
+        if (getRequest.equals(Key.GET_session_announcements.name())) {
             writer.print(getSessionAnnouncements(req.getSession()));
             writer.flush();
         }
-        if (getRequest.equals("Get only with photo")) {
+        if (getRequest.equals(Key.GET_only_with_photo.name())) {
             writer.print(collectJSON(filterDao.getUsersWithAnnouncementsHasPhoto()));
             writer.flush();
         }
-        if (getRequest.equals("Get only the last day")) {
+        if (getRequest.equals(Key.GET_only_the_last_day.name())) {
             writer.print(collectJSON(filterDao.getUsersWhoPostedLastDay()));
             writer.flush();
         }
-        if (getRequest.equals("Get cars by brand")) {
+        if (getRequest.equals(Key.GET_cars_by_brand.name())) {
             String carName = req.getParameter("carName");
             writer.print(collectJSON(filterDao.getUsersWithCarDefinedBrand(carName)));
             writer.flush();
@@ -114,5 +114,16 @@ public class IndexServlet extends HttpServlet {
         box.ifPresent(user -> user.getAnnouncements()
                 .forEach(announcement -> json.put(announcement.getName(), announcement.getName())));
         return json;
+    }
+
+    /**
+     * Enum keys request
+     */
+    private enum Key {
+        GET_announcements,
+        GET_session_announcements,
+        GET_only_with_photo,
+        GET_only_the_last_day,
+        GET_cars_by_brand
     }
 }
